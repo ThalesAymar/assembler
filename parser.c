@@ -20,3 +20,26 @@ CommandType getCommandType(char* token){
 	}
 }
 
+
+CInstruction parseCInstruction(char* instruction){
+    char* dest = NULL;
+    char* comp = NULL;
+    char* jump = NULL;
+
+    char* left = strtok(instruction, "=");
+    char* right = strtok(NULL, "=");
+
+    if(right != NULL){
+        dest = left;
+        comp = strtok(right, ";");
+        jump = strtok(NULL, ";");
+    }
+    else{
+        comp = strtok(left, ";");
+        jump = strtok(NULL, ";");
+    }
+    
+    CInstruction c = {dest, comp, jump};
+    
+    return c;
+}
