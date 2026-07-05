@@ -19,6 +19,15 @@ typedef struct{
 	CommandType type;
 } Command;
 
+typedef struct{
+    char *dest;
+    char *comp;
+    char *jump;
+} CInstruction;
+
+
+CInstruction parseCInstruction(char *instruction);
+
 
 CommandType getCommandType(char* token);
 
