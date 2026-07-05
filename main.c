@@ -10,10 +10,11 @@
 
 int main(int argc, char *argv[]) {
 	FILE *arq = fopen("teste.txt", "r");
-
 	
-	if(arq == NULL){
-        printf("Erro ao abrir arquivo\n");
+	FILE *out = fopen("teste.hack", "w");
+	
+	if (!arq || !out) {
+        printf("Erro ao abrir arquivos.\n");
         return 1;
     }
 
@@ -95,18 +96,30 @@ int main(int argc, char *argv[]) {
 		CommandType type = getCommandType(p.currentToken);
 		
 		CInstruction c;
+		int len = strlen(p.currentToken);
+		char a_command[len];
 		 
 		
 		switch (type) {
-            case A_COMMAND:                                
+            case A_COMMAND:
+				strncpy(a_command, p.currentToken + 1, len ); // pula o @
+				
+                a_command[len-1] = '\0'; // garante terminação da string
+				
                 break;
             case C_COMMAND:
                 c = parseCInstruction(p.currentToken);
+				
+				fprintf(out, "111%s%s%s\n", getCompCode(c.comp), getDestCode(c.dest), getJumpCode(c.jump));
+				
                 break;
             default:
                 break;
 		}
 	}
+
+	fclose(arq);
+    fclose(out);
 		
 	return 0;
 }
