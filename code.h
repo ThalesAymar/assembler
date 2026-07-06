@@ -16,6 +16,8 @@ char* getCompCode(char *mnemonic);
 
 char* getJumpCode(char *mnemonic);
 
+void writeAInstruction(FILE* out, int value);
 
+int isNumber(char* s);
 
 #endif
