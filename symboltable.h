@@ -18,9 +18,11 @@ typedef struct {
 
 void addEntry(SymbolTable* st, char* symbol, int address);
 
-
-
 void initTable(SymbolTable* st);
+
+int contains(SymbolTable* st, char* symbol);
+
+int getAddress(SymbolTable* st, char* symbol);
 
 
 #endif
