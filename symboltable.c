@@ -44,3 +44,34 @@ void initTable(SymbolTable* st){
 	addEntry(st, "THAT", 4);
 }
 
+
+
+
+
+int contains(SymbolTable* st, char* symbol){
+	
+	
+	for(int i = 0; i < st->count; i++){
+		 if (strcmp(symbol, st->table[i].symbol) == 0) {
+            return 1;
+        }
+	}
+	
+	return 0;
+}
+
+
+
+int getAddress(SymbolTable* st, char* symbol){
+	
+	
+	for(int i = 0; i < st->count; i++){
+		 if (strcmp(symbol, st->table[i].symbol) == 0) {
+            return st->table[i].address;
+        }
+	}
+	
+	printf("Endereço do comando nao encontrado\n");
+	exit(-1);
+}
+
