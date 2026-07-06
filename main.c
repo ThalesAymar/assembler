@@ -97,17 +97,34 @@ int main(int argc, char *argv[]) {
 		
 		CInstruction c;
 		int len = strlen(p.currentToken);
+		int address;
 		char a_command[len];
 		 
 		
 		switch (type) {
             case A_COMMAND:
-				strncpy(a_command, p.currentToken + 1, len ); // pula o @
 				
+				strncpy(a_command, p.currentToken + 1, len ); // pula o @
                 a_command[len-1] = '\0'; // garante terminação da string
+
+
+				if(isNumber(a_command)){
+                	address = atoi(a_command);
+				}
+				else{
+					
+					if (!contains(&st, a_command)){
+        				addEntry(&st, a_command, st.romAddress++);
+    				}
+    				
+					address = getAddress(&st, a_command);
+				}
+
+				writeAInstruction(out, address);
 				
                 break;
             case C_COMMAND:
+				
                 c = parseCInstruction(p.currentToken);
 				
 				fprintf(out, "111%s%s%s\n", getCompCode(c.comp), getDestCode(c.dest), getJumpCode(c.jump));
