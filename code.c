@@ -125,3 +125,30 @@ char* getJumpCode(char* mnemonic){
 
 
 
+
+void writeAInstruction(FILE* out, int value) {
+
+    fputc('0', out);   // bit mais significativo
+
+    for (int i = 14; i >= 0; i--) {
+        if (value & (1 << i)){
+            fputc('1', out);
+    	}
+        else{
+            fputc('0', out);
+    	}
+    }
+
+    fputc('\n', out);
+}
+
+
+
+int isNumber(char* s) {
+    while (*s) {
+        if (*s < '0' || *s > '9')
+            return 0;
+        s++;
+    }
+    return 1;
+}
